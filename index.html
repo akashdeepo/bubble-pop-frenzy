@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO & Social Media Optimization -->
+    <title>🫧 Bubble Pop Frenzy - Most Addictive Bubble Game Ever!</title>
+    <meta name="description" content="Can you beat 10,000 points? Addictive bubble popping game with zen mode, power-ups, and combos. Play free now - warning: extremely addictive!">
+    <meta name="keywords" content="bubble game, addictive game, free online game, bubble pop, zen game, stress relief, casual game">
+    
+    <!-- Open Graph (Facebook, LinkedIn) -->
+    <meta property="og:title" content="🫧 Can You Beat 10,000 Points? - Bubble Pop Frenzy">
+    <meta property="og:description" content="Warning: Extremely addictive bubble popping game! Zen mode for relaxation, power-ups for excitement. Free to play!">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1579952363873-27d3bfad9c0d?w=1200&h=630&fit=crop">
+    <meta property="og:url" content="https://yourusername.github.io/bubble-pop-frenzy">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="🫧 Can You Beat 10,000 Points? - Most Addictive Bubble Game">
+    <meta name="twitter:description" content="Warning: Extremely addictive! Free bubble popping game with zen mode. Can you resist?">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1579952363873-27d3bfad9c0d?w=1200&h=630&fit=crop">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🫧</text></svg>">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="header">
+            <h1>🫧 Bubble Pop Frenzy</h1>
+            <div class="stats">
+                <div class="score">Score: <span id="score">0</span></div>
+                <div class="level">Level: <span id="level">1</span></div>
+                <div class="timer">Time: <span id="timer">60</span>s</div>
+                <div class="combo hidden" id="combo">Combo: <span id="comboCount">0</span>x</div>
+            </div>
+        </div>
+        
+        <div class="game-area" id="gameArea">
+            <div class="start-screen" id="startScreen">
+                <h2>🎯 Can You Beat 10,000 Points?</h2>
+                <p class="challenge-text">⚠️ WARNING: Extremely Addictive Game!</p>
+                <div class="rules">
+                    <p>⚡ Golden bubbles = 50 points</p>
+                    <p>💣 Red bubbles = -20 points</p>
+                    <p>❄️ Blue power-ups freeze time</p>
+                    <p>✨ Pink power-ups = double points</p>
+                    <p>🔥 Chain combos for massive scores!</p>
+                </div>
+                <div class="difficulty-buttons">
+                    <button id="startBtn" class="start-btn challenge">🚀 ACCEPT CHALLENGE</button>
+                    <button id="zenBtn" class="start-btn zen">🧘 Relaxing Mode</button>
+                </div>
+                <p class="player-count" id="playerCount">🎮 Join 10,247 players worldwide!</p>
+            </div>
+            
+            <div class="game-over-screen hidden" id="gameOverScreen">
+                <h2>🎯 Game Over!</h2>
+                <p>Final Score: <span id="finalScore">0</span></p>
+                <p>Level Reached: <span id="finalLevel">1</span></p>
+                <p id="scoreFeedback">Keep trying!</p>
+                <div class="share-buttons">
+                    <button id="shareTwitter" class="share-btn twitter">🐦 Tweet Score</button>
+                    <button id="shareScore" class="share-btn">📋 Copy Link</button>
+                </div>
+                <button id="restartBtn" class="start-btn">🔄 Try to Beat It!</button>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button id="pauseBtn" class="control-btn">⏸️ Pause</button>
+            <button id="muteBtn" class="control-btn">🔊 Sound</button>
+            <button id="zenToggle" class="control-btn">🧘 Zen</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="viral-features.js"></script>
+</body>
+</html>
