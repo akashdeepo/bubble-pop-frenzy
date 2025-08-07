@@ -127,27 +127,53 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 1000);
 });
 
-// Mobile optimizations
+// Enhanced mobile optimizations
 document.addEventListener('DOMContentLoaded', () => {
-    // Prevent scrolling on touch
-    document.body.addEventListener('touchmove', (e) => {
+    // Prevent all default touch behaviors
+    document.addEventListener('gesturestart', function (e) {
         e.preventDefault();
+    });
+    
+    // Prevent scrolling
+    document.addEventListener('touchmove', function(e) {
+        if (e.target.closest('.game-area')) {
+            e.preventDefault();
+        }
     }, { passive: false });
     
-    // Prevent zoom on double tap
+    // Prevent double-tap zoom
     let lastTouchEnd = 0;
     document.addEventListener('touchend', function (event) {
-        const now = (new Date()).getTime();
+        const now = Date.now();
         if (now - lastTouchEnd <= 300) {
             event.preventDefault();
         }
         lastTouchEnd = now;
     }, false);
     
-    // Add touch feedback
-    document.addEventListener('touchstart', () => {
-        if (navigator.vibrate) {
-            navigator.vibrate(10);
-        }
+    // Fix iOS Safari viewport issues
+    const setViewportHeight = () => {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    };
+    
+    setViewportHeight();
+    window.addEventListener('resize', setViewportHeight);
+    window.addEventListener('orientationchange', setViewportHeight);
+    
+    // Prevent context menu on long press
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        return false;
+    });
+    
+    // Add active states for better touch feedback
+    document.querySelectorAll('.start-btn, .control-btn, .share-btn').forEach(btn => {
+        btn.addEventListener('touchstart', function() {
+            this.style.transform = 'scale(0.95)';
+        });
+        btn.addEventListener('touchend', function() {
+            this.style.transform = 'scale(1)';
+        });
     });
 });
