@@ -10,11 +10,14 @@ body {
     background-size: 400% 400%;
     animation: gradientShift 20s ease infinite;
     min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height for mobile */
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
     position: relative;
+    padding: 0;
+    margin: 0;
 }
 
 body::before {
@@ -43,13 +46,14 @@ body::before {
 }
 
 .game-container {
-    width: 90vw;
+    width: 100vw;
     max-width: 800px;
-    height: 90vh;
+    height: 100vh;
+    height: 100dvh; /* Dynamic viewport height */
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0;
+    border: none;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -57,31 +61,40 @@ body::before {
 
 .header {
     background: rgba(255, 255, 255, 0.2);
-    padding: 20px;
+    padding: 15px 10px;
     text-align: center;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    flex-shrink: 0;
 }
 
 .header h1 {
     color: white;
-    font-size: 2.5em;
-    margin-bottom: 15px;
+    font-size: 2em;
+    margin-bottom: 10px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    line-height: 1.2;
 }
 
 .stats {
-    display: flex;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 8px;
     color: white;
-    font-size: 1.2em;
+    font-size: 1em;
     font-weight: bold;
+    max-width: 100%;
 }
 
 .stats div {
     background: rgba(255, 255, 255, 0.2);
-    padding: 10px 20px;
-    border-radius: 25px;
+    padding: 8px 12px;
+    border-radius: 20px;
     backdrop-filter: blur(5px);
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .game-area {
@@ -473,11 +486,195 @@ body::before {
     100% { transform: translateX(0); opacity: 1; }
 }
 
-@media (max-width: 600px) {
-    .header h1 { font-size: 2em; }
-    .stats { flex-direction: column; gap: 10px; }
-    .start-screen h2, .game-over-screen h2 { font-size: 2em; }
-    .start-screen, .game-over-screen { padding: 30px 20px; }
-    .difficulty-buttons { flex-direction: column; align-items: center; }
-    .share-buttons { flex-direction: column; align-items: center; }
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+    body {
+        padding: 0;
+    }
+    
+    .game-container {
+        width: 100vw;
+        height: 100vh;
+        height: 100dvh;
+        border-radius: 0;
+        max-width: none;
+    }
+    
+    .header {
+        padding: 10px 8px;
+    }
+    
+    .header h1 {
+        font-size: 1.8em;
+        margin-bottom: 8px;
+    }
+    
+    .stats {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 6px;
+        font-size: 0.9em;
+        padding: 0 5px;
+    }
+    
+    .stats div {
+        padding: 6px 8px;
+        font-size: 0.85em;
+    }
+    
+    .start-screen, .game-over-screen {
+        padding: 20px 15px;
+        margin: 10px;
+        border-radius: 15px;
+        max-height: 80%;
+        overflow-y: auto;
+    }
+    
+    .start-screen h2, .game-over-screen h2 {
+        font-size: 1.6em;
+        margin-bottom: 15px;
+    }
+    
+    .challenge-text {
+        font-size: 1em;
+    }
+    
+    .rules {
+        margin: 15px 0;
+        max-width: 100%;
+    }
+    
+    .rules p {
+        font-size: 0.9em;
+        margin: 6px 0;
+        padding: 4px 8px;
+    }
+    
+    .difficulty-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+    }
+    
+    .start-btn {
+        width: 100%;
+        max-width: 280px;
+        padding: 12px 20px;
+        font-size: 1.1em;
+        margin: 0;
+    }
+    
+    .share-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+    }
+    
+    .share-btn {
+        width: 100%;
+        max-width: 250px;
+        padding: 10px 15px;
+        font-size: 0.95em;
+    }
+    
+    .player-count {
+        font-size: 0.8em;
+        margin-top: 10px;
+    }
+    
+    .controls {
+        padding: 10px;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+    
+    .control-btn {
+        padding: 8px 12px;
+        font-size: 0.9em;
+        flex: 1;
+        min-width: 80px;
+    }
+    
+    .bubble {
+        min-width: 40px;
+        min-height: 40px;
+    }
+    
+    .score-popup {
+        font-size: 1.2em;
+    }
+    
+    .combo-indicator {
+        font-size: 1.5em;
+        right: 10px;
+        top: 15%;
+    }
+    
+    .viral-popup {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        right: 10px;
+        max-width: none;
+        font-size: 0.9em;
+        padding: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header h1 {
+        font-size: 1.5em;
+    }
+    
+    .stats {
+        font-size: 0.8em;
+        gap: 4px;
+    }
+    
+    .stats div {
+        padding: 5px 6px;
+        font-size: 0.75em;
+    }
+    
+    .start-screen h2, .game-over-screen h2 {
+        font-size: 1.4em;
+    }
+    
+    .start-btn {
+        font-size: 1em;
+        padding: 10px 15px;
+    }
+    
+    .bubble {
+        min-width: 35px;
+        min-height: 35px;
+    }
+}
+
+/* Landscape mobile orientation */
+@media (max-height: 500px) and (orientation: landscape) {
+    .header {
+        padding: 8px;
+    }
+    
+    .header h1 {
+        font-size: 1.4em;
+        margin-bottom: 5px;
+    }
+    
+    .stats {
+        font-size: 0.8em;
+        gap: 4px;
+    }
+    
+    .start-screen, .game-over-screen {
+        padding: 15px 10px;
+        max-height: 90%;
+    }
+    
+    .controls {
+        padding: 6px;
+    }
 }

@@ -126,3 +126,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, 1000);
 });
+
+// Mobile optimizations
+document.addEventListener('DOMContentLoaded', () => {
+    // Prevent scrolling on touch
+    document.body.addEventListener('touchmove', (e) => {
+        e.preventDefault();
+    }, { passive: false });
+    
+    // Prevent zoom on double tap
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', function (event) {
+        const now = (new Date()).getTime();
+        if (now - lastTouchEnd <= 300) {
+            event.preventDefault();
+        }
+        lastTouchEnd = now;
+    }, false);
+    
+    // Add touch feedback
+    document.addEventListener('touchstart', () => {
+        if (navigator.vibrate) {
+            navigator.vibrate(10);
+        }
+    });
+});

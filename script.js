@@ -161,13 +161,20 @@ class BubblePopGame {
             bubble.dataset.type = 'normal';
         }
         
-        const size = Math.random() * 40 + 30;
+        // Larger bubbles on mobile for better touch targets
+        const isMobile = window.innerWidth <= 768;
+        const size = isMobile ? Math.random() * 50 + 45 : Math.random() * 40 + 30;
         bubble.style.width = size + 'px';
         bubble.style.height = size + 'px';
         bubble.style.left = Math.random() * (this.gameArea.offsetWidth - size) + 'px';
         bubble.style.top = Math.random() * (this.gameArea.offsetHeight - size) + 'px';
         
+        // Better touch handling for mobile
         bubble.addEventListener('click', (e) => this.popBubble(e.target));
+        bubble.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            this.popBubble(e.target);
+        }, { passive: false });
         
         setTimeout(() => {
             if (bubble.parentNode) {
@@ -440,6 +447,10 @@ class BubblePopGame {
         powerUp.style.top = Math.random() * (this.gameArea.offsetHeight - 40) + 'px';
         
         powerUp.addEventListener('click', () => this.activatePowerUp(powerUp));
+        powerUp.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            this.activatePowerUp(powerUp);
+        }, { passive: false });
         
         setTimeout(() => {
             if (powerUp.parentNode) {
